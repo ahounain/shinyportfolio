@@ -1078,7 +1078,7 @@
   resolved "https://registry.yarnpkg.com/@jridgewell/set-array/-/set-array-1.2.1.tgz#558fb6472ed16a4c850b889530e6b36438c49280"
   integrity sha512-R8gLRTZeyp03ymzP/6Lil/28tGeGEzhx1q2k703KGWRAI1VdvPIXdG70VJc2pAMw3NA6JKL5hhFu1sJX0Mnn/A==
 
-"@jridgewell/sourcemap-codec@^1.4.10", "@jridgewell/sourcemap-codec@^1.4.14":
+"@jridgewell/sourcemap-codec@^1.4.10", "@jridgewell/sourcemap-codec@^1.4.14", "@jridgewell/sourcemap-codec@^1.4.8":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.5.0.tgz#3188bcb273a414b0d215fd22a58540b989b9409a"
   integrity sha512-gv3ZRaISU3fjPAgNsriBRqGWQL6quFx04YMPW/zD8XMLsU32mhCCbfbO6KZFLjvYpCZ8zyDEgqsgf+PwPaM7GQ==
@@ -5863,6 +5863,11 @@ uuid@3.3.2:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
   integrity sha512-yXJmeNaw3DnnKAOKJE51sL/ZaYfWJRl1pK9dr19YFCu0ObS231AB1/LbqTKRAQ5kw8A90rA6fr4riOUpTZvQZA==
 
+uuid@^7.0.0:
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-7.0.3.tgz#c5c9f2c8cf25dc0a372c4df1441c41f5bd0c680b"
+  integrity sha512-DPSke0pXhTZgoF/d+WSt2QaKMCFSfx7QegxEWT+JOuHF5aWrKEn0G+ztjuJg/gG8/ItK+rbPCD/yNv8yyih6Cg==
+
 uuid@^9.0.1:
   version "9.0.1"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-9.0.1.tgz#e188d4c8853cc722220392c424cd637f32293f30"
@@ -5873,7 +5878,7 @@ v8-compile-cache-lib@^3.0.1:
   resolved "https://registry.yarnpkg.com/v8-compile-cache-lib/-/v8-compile-cache-lib-3.0.1.tgz#6336e8d71965cb3d35a1bbb7868445a7c05264bf"
   integrity sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==
 
-vercel@^39.2.6:
+vercel@latest:
   version "39.3.0"
   resolved "https://registry.yarnpkg.com/vercel/-/vercel-39.3.0.tgz#d1a9b4727cc568c217019bf0f60df37a3c96b70e"
   integrity sha512-VyGaH5tnVVsgACcbU4PCRyQBDg/SST7/HQBaIXNnmOW7Ngjcn04wamjPgYAdFUGroiTm+ZpmNbCO1DQXzNeTjQ==
@@ -5984,7 +5989,7 @@ workerd@1.20241230.0:
     "@cloudflare/workerd-linux-arm64" "1.20241230.0"
     "@cloudflare/workerd-windows-64" "1.20241230.0"
 
-wrangler@^3.101.0:
+wrangler@latest:
   version "3.101.0"
   resolved "https://registry.yarnpkg.com/wrangler/-/wrangler-3.101.0.tgz#6b8cb25c8c56aa3119961d451fe7612b6146558d"
   integrity sha512-zKRqL/jjyF54DH8YCCaF4B2x0v9kSdxLpNkxGDltZ17vCBbq9PCchooN25jbmxOTC2LWdB2LVDw7S66zdl7XuQ==
