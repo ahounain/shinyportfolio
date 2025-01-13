@@ -1,11 +1,4 @@
 name = "shinyportfolio"
-type = "javascript"
-account_id = "your_account_id"
-workers_dev = true
-compatibility_date = "2023-10-01"
-
-[build]
-command = "yarn build"
-[build.upload]
-format = "service-worker"
-dir = ".vercel/output/static"
+compatibility_date = "2025-07-29"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".vercel/output/static"
