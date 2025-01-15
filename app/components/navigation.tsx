@@ -17,7 +17,7 @@ export function Navigation() {
 
   return (
     <div className="glass-effect mx-auto max-w-4xl rounded-full mt-4">
-      <nav className="bg-transparent shadow-sm text-white">
+      <nav className="bg-transparent shadow-sm text-white px-3">
         <ul className="flex justify-center space-x-4 py-4">
           {links.map(({ href, label }) => (
             <li key={href}>
