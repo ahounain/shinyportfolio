@@ -3,7 +3,9 @@ locale = "en-US"
 title = "Ali Hounain — Software Engineer"
 disableKinds = ["taxonomy", "term", "RSS"]
 enableRobotsTXT = true
+
 [params]
   description = "Technology Associate at Liberty Mutual. Enterprise APIs, document generation, and application modernization."
+
 [outputs]
   home = ["HTML"]

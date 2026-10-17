@@ -1,1 +1,17 @@
-{{ define "main" }}<main class="content-page resume-page"><h1>Résumé</h1><a class="text-link" href="{{ "aliresume.pdf" | relURL }}" target="_blank" rel="noopener">OPEN OR DOWNLOAD PDF ↗</a><iframe src="{{ "aliresume.pdf" | relURL }}" title="Ali Hounain’s résumé"></iframe></main>{{ end }}
+{{ define "main" }}
+  <main class="content-page resume-page">
+    <h1>Résumé</h1>
+    <a
+      class="text-link"
+      href="{{ "aliresume.pdf" | relURL }}"
+      target="_blank"
+      rel="noopener"
+    >
+      OPEN OR DOWNLOAD PDF ↗
+    </a>
+    <iframe
+      src="{{ "aliresume.pdf" | relURL }}"
+      title="Ali Hounain’s résumé"
+    ></iframe>
+  </main>
+{{ end }}

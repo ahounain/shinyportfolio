@@ -1,21 +1,50 @@
 <!doctype html>
 <html lang="{{ site.Language.Locale }}">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} — {{ site.Title }}{{ end }}</title>
-  <meta name="description" content="{{ .Description | default site.Params.description }}">
-  <link rel="icon" href="{{ "favicon.ico" | relURL }}">
-  {{ $css := resources.Get "css/site.css" | minify | fingerprint }}
-  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
-  {{ $js := resources.Get "js/site.js" | minify | fingerprint }}
-  <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
-</head>
-<body>
-  {{ if .IsHome }}{{ partial "opening.html" . }}{{ end }}
-  <a class="skip" href="{{ site.Home.RelPermalink }}#experience">Skip to experience</a>
-  {{ partial "header.html" . }}
-  {{ block "main" . }}{{ end }}
-  {{ if not .IsHome }}{{ partial "footer.html" . }}{{ end }}
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+    <title>
+      {{ if .IsHome }}
+        {{ site.Title }}
+      {{ else }}
+        {{ .Title }} —
+        {{ site.Title }}
+      {{ end }}
+    </title>
+    <meta
+      name="description"
+      content="{{ .Description | default site.Params.description }}"
+    />
+    <link
+      rel="icon"
+      href="{{ "favicon.ico" | relURL }}"
+    />
+    {{ $css := resources.Get "css/site.css" | minify | fingerprint }}
+    <link
+      rel="stylesheet"
+      href="{{ $css.RelPermalink }}"
+      integrity="{{ $css.Data.Integrity }}"
+    />
+    {{ $js := resources.Get "js/site.js" | minify | fingerprint }}
+    <script
+      src="{{ $js.RelPermalink }}"
+      integrity="{{ $js.Data.Integrity }}"
+      defer
+    ></script>
+  </head>
+  <body>
+    {{ if .IsHome }}{{ partial "opening.html" . }}{{ end }}
+    <a
+      class="skip"
+      href="{{ site.Home.RelPermalink }}#experience"
+    >
+      Skip to experience
+    </a>
+    {{ partial "header.html" . }}
+    {{ block "main" . }}{{ end }}
+    {{ if not .IsHome }}{{ partial "footer.html" . }}{{ end }}
+  </body>
 </html>

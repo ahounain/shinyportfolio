@@ -26,7 +26,7 @@ Upload the generated **public/** directory to any static host. Set the final bas
 
 ## Edit the site
 
-- **layouts/_partials/**: home sections, navigation, opening, and footer.
+- **layouts/\_partials/**: home sections, navigation, opening, and footer.
 - **assets/css/site.css**: design and responsive rules.
 - **assets/js/site.js**: intro/replay/skip behavior; native HTML details handles expandable history.
 - **static/aliresume.pdf**: downloadable résumé.
@@ -34,3 +34,7 @@ Upload the generated **public/** directory to any static host. Set the final bas
 - **content/**: miscellaneous page and legacy About/Projects redirects; résumé viewer.
 
 Hugo fingerprints CSS and JavaScript for cache-safe updates. The opening is skipped for reduced-motion preferences and deep links, and can be dismissed with Escape. All core content is available without JavaScript. Do not edit or commit generated public/ files.
+
+## Code formatting
+
+The repository includes `.editorconfig` and `.prettierrc.json` for consistent indentation and line wrapping. For optional format-on-save support, configure your editor's Prettier integration with `prettier-plugin-go-template`. The font-generation Python source uses Black formatting. These tools are not needed to run or build the Hugo site.
