@@ -1947,6 +1947,37 @@ body {
   }
 }
 
+.portfolio-main {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+}
+.portfolio-main > section,
+.portfolio-main > footer {
+  position: relative;
+  z-index: 1;
+}
+.mountain-backdrop {
+  position: absolute;
+  z-index: 0;
+  top: 20px;
+  left: -12%;
+  width: 124%;
+  max-width: none;
+  height: auto;
+  opacity: 0.32;
+  pointer-events: none;
+  user-select: none;
+  mask-image: linear-gradient(to bottom, #000 0%, #000 65%, transparent 100%);
+}
+@media (max-width: 700px) {
+  .mountain-backdrop {
+    top: 70px;
+    left: -50%;
+    width: 200%;
+    opacity: 0.27;
+  }
+}
 .content-page {
   max-width: 900px;
   margin: 55px auto 75px;

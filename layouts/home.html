@@ -1,5 +1,17 @@
 {{ define "main" }}
-  <main>
+  <main class="portfolio-main">
+    {{ $mountain := resources.Get "images/mountain-cutout.png" }}
+    {{ $mountainWeb := $mountain.Resize "1400x webp q82" }}
+    <img
+      class="mountain-backdrop"
+      src="{{ $mountainWeb.RelPermalink }}"
+      width="{{ $mountainWeb.Width }}"
+      height="{{ $mountainWeb.Height }}"
+      alt=""
+      aria-hidden="true"
+      decoding="async"
+      fetchpriority="low"
+    />
     {{ partial "hero.html" . }}
     {{ partial "experience.html" . }}
     {{ partial "about.html" . }}
