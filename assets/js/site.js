@@ -1,31 +1,99 @@
 (() => {
   const overlay = document.querySelector('[data-opening]');
-  if (!overlay) {
-    document.querySelector('.replay-intro')?.setAttribute('hidden', '');
+  const replay = document.querySelector('.replay-intro');
+  const target = document.querySelector('[data-opening-target]');
+  if (!overlay || !target) {
+    replay?.setAttribute('hidden', '');
     return;
   }
+  const root = document.documentElement;
+  const mark = overlay.querySelector('svg');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-  let timer, previousFocus;
+  let generation = 0;
+  let animations = [];
+  let previousFocus;
   const dismiss = () => {
-    clearTimeout(timer);
+    generation += 1;
     const focusedInside = overlay.contains(document.activeElement);
+    animations.forEach((animation) => animation.cancel());
+    animations = [];
     overlay.hidden = true;
+    overlay.classList.remove('is-docking');
+    root.classList.remove('intro-running', 'intro-docking');
     if (focusedInside && previousFocus) previousFocus.focus();
   };
-  const play = () => {
+  // Match the letter's ink bounds, rather than the surrounding line box.
+  const targetBounds = () => {
+    const box = target.getBoundingClientRect();
+    const style = getComputedStyle(target);
+    const size = parseFloat(style.fontSize);
+    const context = document.createElement('canvas').getContext('2d');
+    context.font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
+    const metrics = context.measureText('A');
+    const ascent = metrics.fontBoundingBoxAscent ?? size * 0.772;
+    const descent = metrics.fontBoundingBoxDescent ?? size * 0.215;
+    const baseline = box.top + (box.height - ascent - descent) / 2 + ascent;
+    return {
+      left: box.left - metrics.actualBoundingBoxLeft,
+      top: baseline - metrics.actualBoundingBoxAscent,
+      width: metrics.actualBoundingBoxLeft + metrics.actualBoundingBoxRight,
+      height: metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent,
+    };
+  };
+  const animate = (keyframes, options) => {
+    const animation = mark.animate(keyframes, options);
+    animations.push(animation);
+    return animation.finished;
+  };
+  const play = async () => {
+    dismiss();
     if (reduced.matches) return;
-    clearTimeout(timer);
+    const current = generation;
     previousFocus = document.activeElement;
-    overlay.classList.add('restarting');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    root.classList.add('intro-running');
     overlay.hidden = false;
-    void overlay.offsetWidth;
-    overlay.classList.remove('restarting');
-    timer = setTimeout(dismiss, 2350);
+    try {
+      await Promise.race([
+        document.fonts.load('100px VelvetOmen'),
+        new Promise((resolve) => setTimeout(resolve, 1200)),
+      ]);
+      if (generation !== current) return;
+      await animate(
+        [
+          { opacity: 0, transform: 'translateY(24px) scale(0.96)' },
+          { opacity: 1, transform: 'none' },
+        ],
+        { duration: 550, easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)' },
+      );
+      if (generation !== current) return;
+      await animate([{ opacity: 1 }, { opacity: 1 }], { duration: 450 });
+      if (generation !== current) return;
+      const from = mark.getBoundingClientRect();
+      const to = targetBounds();
+      root.classList.add('intro-docking');
+      overlay.classList.add('is-docking');
+      await animate(
+        [
+          { transform: 'none' },
+          {
+            transform: `translate(${to.left - from.left}px, ${to.top - from.top}px) scale(${to.width / from.width}, ${to.height / from.height})`,
+          },
+        ],
+        { duration: 1050, easing: 'cubic-bezier(0.65, 0, 0.2, 1)', fill: 'forwards' },
+      );
+      if (generation === current) dismiss();
+    } catch {
+      if (generation === current) dismiss();
+    }
   };
   overlay.querySelector('button').addEventListener('click', dismiss);
-  document.querySelector('.replay-intro')?.addEventListener('click', play);
+  replay?.addEventListener('click', play);
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') dismiss();
+  });
+  window.addEventListener('resize', () => {
+    if (!overlay.hidden) dismiss();
   });
   reduced.addEventListener('change', () => {
     if (reduced.matches) dismiss();

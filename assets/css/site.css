@@ -811,22 +811,21 @@ footer {
   color: #ef4425;
   overflow: hidden;
   isolation: isolate;
-  animation: opening-exit 0.45s cubic-bezier(0.7, 0, 0.3, 1) 1.85s both;
+  transition: background-color 0.55s ease;
 }
 .opening-mark {
   position: absolute;
   inset: 0;
   display: grid;
   place-items: center;
-  animation:
-    mark-arrive 1s cubic-bezier(0.2, 0.8, 0.2, 1) both,
-    mark-expand 0.75s cubic-bezier(0.7, 0, 0.6, 1) 1.25s forwards;
 }
 .opening-mark svg {
-  height: 135vmin;
-  width: 135vmin;
+  height: auto;
+  width: min(76vw, 52svh);
+  max-height: 72svh;
   max-width: none;
   flex-shrink: 0;
+  transform-origin: top left;
 }
 .opening-caption {
   position: absolute;
@@ -869,7 +868,7 @@ footer {
 }
 @keyframes mark-arrive {
   from {
-    transform: translateY(18vh) scale(0.85);
+    transform: translateY(6vh) scale(0.92);
     clip-path: inset(100% 0 0);
   }
   to {
@@ -877,11 +876,37 @@ footer {
     clip-path: inset(0);
   }
 }
-@keyframes mark-expand {
-  to {
-    transform: scale(5);
-    opacity: 0;
-  }
+html {
+  scrollbar-gutter: stable;
+}
+html.intro-running {
+  overflow: hidden;
+}
+[data-opening-target] {
+  display: inline-block;
+}
+.intro-running #name {
+  opacity: 0;
+}
+.intro-running [data-opening-target] {
+  visibility: hidden;
+}
+.intro-docking #name {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+.opening.is-docking {
+  background-color: transparent;
+}
+.opening.is-docking::after {
+  opacity: 0;
+}
+.opening.is-docking .opening-caption {
+  animation: none;
+  opacity: 0;
+}
+.opening.is-docking .opening-skip {
+  opacity: 0;
 }
 @keyframes opening-exit {
   to {
@@ -961,8 +986,7 @@ footer {
     bottom: 30px;
   }
   .opening-mark svg {
-    height: 150vmin;
-    width: 150vmin;
+    width: min(76vw, 52svh);
   }
   .monogram {
     width: 40px;
