@@ -1957,25 +1957,25 @@ body {
   position: relative;
   z-index: 1;
 }
-.mountain-backdrop {
+.architecture-backdrop {
   position: absolute;
   z-index: 0;
-  top: 20px;
-  left: -12%;
-  width: 124%;
+  top: -50px;
+  left: 0;
+  width: 100%;
   max-width: none;
   height: auto;
-  opacity: 0.32;
+  opacity: 0.4;
   pointer-events: none;
   user-select: none;
   mask-image: linear-gradient(to bottom, #000 0%, #000 65%, transparent 100%);
 }
 @media (max-width: 700px) {
-  .mountain-backdrop {
-    top: 70px;
-    left: -50%;
+  .architecture-backdrop {
+    top: 25px;
+    left: -85%;
     width: 200%;
-    opacity: 0.27;
+    opacity: 0.32;
   }
 }
 .content-page {

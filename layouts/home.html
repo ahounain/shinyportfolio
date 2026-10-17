@@ -1,12 +1,12 @@
 {{ define "main" }}
   <main class="portfolio-main">
-    {{ $mountain := resources.Get "images/mountain-cutout.png" }}
-    {{ $mountainWeb := $mountain.Resize "1400x webp q82" }}
+    {{ $architecture := resources.Get "images/architecture-cutout.png" }}
+    {{ $architectureWeb := $architecture.Resize "1400x webp q82" }}
     <img
-      class="mountain-backdrop"
-      src="{{ $mountainWeb.RelPermalink }}"
-      width="{{ $mountainWeb.Width }}"
-      height="{{ $mountainWeb.Height }}"
+      class="architecture-backdrop"
+      src="{{ $architectureWeb.RelPermalink }}"
+      width="{{ $architectureWeb.Width }}"
+      height="{{ $architectureWeb.Height }}"
       alt=""
       aria-hidden="true"
       decoding="async"
