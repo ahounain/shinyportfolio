@@ -2032,24 +2032,28 @@ footer a {
   z-index: 1;
 }
 .architecture-backdrop {
-  position: absolute;
+  position: fixed;
   z-index: 0;
-  top: -50px;
-  left: 0;
-  width: 100%;
+  top: -18vh;
+  left: -10vw;
+  width: 120vw;
   max-width: none;
-  height: auto;
-  opacity: 0.4;
+  height: 118vh;
+  object-fit: cover;
+  object-position: center bottom;
+  opacity: 0.28;
   pointer-events: none;
   user-select: none;
-  mask-image: linear-gradient(to bottom, #000 0%, #000 65%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 85%, transparent 100%);
 }
 @media (max-width: 700px) {
   .architecture-backdrop {
-    top: 25px;
-    left: -85%;
-    width: 200%;
-    opacity: 0.32;
+    top: -10svh;
+    left: -30vw;
+    width: 160vw;
+    height: 110svh;
+    object-position: 60% bottom;
+    opacity: 0.24;
   }
 }
 .content-page {

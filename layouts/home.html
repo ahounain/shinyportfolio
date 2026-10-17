@@ -1,6 +1,6 @@
 {{ define "main" }}
   <main class="portfolio-main">
-    {{ $architecture := resources.Get "images/architecture-cutout.png" }}
+    {{ $architecture := resources.Get "images/architecture-wide.png" }}
     {{ $architectureWeb := $architecture.Resize "1400x webp q82" }}
     <img
       class="architecture-backdrop"
