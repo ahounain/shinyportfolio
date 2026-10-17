@@ -1,4 +1,3 @@
 name = "shinyportfolio"
-compatibility_date = "2025-01-12"
-compatibility_flags = ["nodejs_compat"]
-pages_build_output_dir = ".vercel/output/static"
+compatibility_date = "2026-10-16"
+pages_build_output_dir = "public"

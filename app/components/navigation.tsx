@@ -1,2 +1,0 @@
-import Link from 'next/link';
-export function Navigation(){return (<header><Link className="wordmark" href="/">AH<span>●</span></Link><span className="header-note">SOFTWARE<br />DEVELOPMENT</span><button type="button" className="replay-intro" aria-label="Replay opening animation">PLAY INTRO ↗</button><nav aria-label="Main navigation"><Link href="/#experience">EXPERIENCE</Link><Link href="/#about">ABOUT</Link><Link href="/aliresume.pdf" target="_blank" rel="noopener">RÉSUMÉ ↗</Link><Link href="/#contact">CONTACT ↗</Link></nav></header>)}

@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ali Hounain — Hugo portfolio
 
-## Getting Started
+A static Hugo site preserving the portfolio's typography, red/cream palette, responsive layout, opening A animation, résumé download, and expandable employment history. No Node, React, npm, or external theme is required.
 
-First, run the development server:
+## Run locally
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Install Hugo (tested with standard edition 0.168.0), then run:
+
+```sh
+hugo server
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open the local URL Hugo prints. To create production files:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```sh
+hugo --minify --baseURL "https://your-domain.example/"
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Upload the generated **public/** directory to any static host. Set the final base URL in hugo.toml or pass --baseURL at build time. Repository subpaths work too, for example https://username.github.io/shinyportfolio/.
 
-## Learn More
+## Hosting
 
-To learn more about Next.js, take a look at the following resources:
+- Cloudflare Pages: build command **hugo --minify**, output directory **public**, HUGO_VERSION **0.168.0**. Change any existing Next.js build preset/command in the dashboard.
+- Other static hosts: run the same build and publish public/. No server runtime is required.
+- GitHub Pages is not enabled automatically by this conversion.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Edit the site
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **layouts/_partials/**: home sections, navigation, opening, and footer.
+- **assets/css/site.css**: design and responsive rules.
+- **assets/js/site.js**: intro/replay/skip behavior; native HTML details handles expandable history.
+- **static/aliresume.pdf**: downloadable résumé.
+- **static/fonts/**: self-hosted font files.
+- **content/**: miscellaneous page and legacy About/Projects redirects; résumé viewer.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Hugo fingerprints CSS and JavaScript for cache-safe updates. The opening is skipped for reduced-motion preferences and deep links, and can be dismissed with Escape. All core content is available without JavaScript. Do not edit or commit generated public/ files.

@@ -1,7 +1,7 @@
-# Portfolio redesign
+# Design and implementation
 
-Cinematic editorial direction using vermilion, warm paper, user-supplied Velvet Omen Grotesk display typography, and Barlow body text. Fonts are served locally. The opening animation and monogram use the A outline from Velvet Omen Grotesk. See design/README.md for font details.
+Vermilion, warm paper, Velvet Omen Grotesk display lettering, and Barlow body text. The opening and monogram use the supplied font's A outline. Typography is self-hosted.
 
-The homepage presents Liberty Mutual employment as one company with nested Technology Associate rotations and a separate internship. Earlier achievements expand with native details controls. The resume download is updated. Retired project listings are removed; /projects redirects to the experience section.
+One Liberty Mutual employment history groups Technology Associate rotations above the internship. Earlier achievements expand with native details controls. Retired projects and the experimental Engineering section are omitted.
 
-Run yarn install and yarn build, or yarn dev for development. The dev script supports Windows. The opening has replay, skip, Escape, and reduced-motion support.
+Hugo renders the same HTML/CSS/JavaScript as static files. See README.md for development and hosting.
