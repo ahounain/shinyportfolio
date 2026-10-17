@@ -1,17 +1,5 @@
 {{ define "main" }}
   <main class="portfolio-main">
-    {{ $architecture := resources.Get "images/spiral-staircase-photo.jpg" }}
-    {{ $architectureWeb := $architecture.Resize "1400x webp q82" }}
-    <img
-      class="architecture-backdrop"
-      src="{{ $architectureWeb.RelPermalink }}"
-      width="{{ $architectureWeb.Width }}"
-      height="{{ $architectureWeb.Height }}"
-      alt=""
-      aria-hidden="true"
-      decoding="async"
-      fetchpriority="low"
-    />
     {{ partial "hero.html" . }}
     {{ partial "experience.html" . }}
     {{ partial "about.html" . }}
