@@ -20,7 +20,22 @@
     />
     <link
       rel="icon"
+      href="{{ "favicon.svg" | relURL }}"
+      type="image/svg+xml"
+    />
+    <link
+      rel="icon"
       href="{{ "favicon.ico" | relURL }}"
+      sizes="16x16 32x32 48x48 64x64"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="{{ "apple-touch-icon.png" | relURL }}"
+      sizes="180x180"
+    />
+    <meta
+      name="theme-color"
+      content="#f04a2a"
     />
     {{ $css := resources.Get "css/site.css" | minify | fingerprint }}
     <link
