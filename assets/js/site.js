@@ -12,6 +12,8 @@
   let generation = 0;
   let animations = [];
   let previousFocus;
+  let replayCount = 0;
+  let raining = false;
   const dismiss = () => {
     generation += 1;
     const focusedInside = overlay.contains(document.activeElement);
@@ -88,7 +90,33 @@
     }
   };
   overlay.querySelector('button').addEventListener('click', dismiss);
-  replay?.addEventListener('click', play);
+  const startRain = () => {
+    if (raining) return;
+    raining = true;
+    dismiss();
+    const rain = document.createElement('div');
+    rain.className = 'letter-rain';
+    rain.setAttribute('aria-hidden', 'true');
+    // Reuse a fixed set of letters forever without accumulating DOM nodes.
+    for (let index = 0; index < 36; index += 1) {
+      const letter = mark.cloneNode(true);
+      letter.style.setProperty('--rain-x', `${Math.random() * 100}%`);
+      letter.style.setProperty('--rain-size', `${24 + Math.random() * 64}px`);
+      letter.style.setProperty('--rain-duration', `${5 + Math.random() * 6}s`);
+      letter.style.setProperty('--rain-delay', `${-Math.random() * 11}s`);
+      letter.style.setProperty('--rain-turn', `${Math.random() * 100 - 50}deg`);
+      letter.style.setProperty('--rain-drift', `${Math.random() * 120 - 60}px`);
+      letter.style.removeProperty('transform');
+      letter.style.removeProperty('opacity');
+      rain.append(letter);
+    }
+    document.body.append(rain);
+  };
+  replay?.addEventListener('click', () => {
+    replayCount += 1;
+    if (replayCount >= 5) startRain();
+    else play();
+  });
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') dismiss();
   });

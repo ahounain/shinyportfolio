@@ -1947,6 +1947,43 @@ body {
   }
 }
 
+.letter-rain {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+.letter-rain svg {
+  position: absolute;
+  top: 0;
+  left: var(--rain-x);
+  width: var(--rain-size);
+  height: auto;
+  color: var(--cream, #ece9de);
+  opacity: 0.7;
+  animation: letter-rain-fall var(--rain-duration) var(--rain-delay) linear infinite;
+}
+.letter-rain svg:nth-child(3n) {
+  color: #121711;
+}
+@keyframes letter-rain-fall {
+  from {
+    transform: translate(-50%, -140px) rotate(0deg);
+  }
+  to {
+    transform: translate(calc(-50% + var(--rain-drift)), calc(100vh + 140px))
+      rotate(var(--rain-turn));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .letter-rain svg {
+    animation-duration: 24s;
+    --rain-turn: 0deg !important;
+    --rain-drift: 0px !important;
+  }
+}
 .portfolio-main {
   position: relative;
   isolation: isolate;
