@@ -1947,6 +1947,17 @@ body {
   }
 }
 
+.employer-identity {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 2vw, 28px);
+}
+.employer-symbol {
+  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
+  font-size: clamp(30px, 4vw, 56px);
+  line-height: 1;
+  flex-shrink: 0;
+}
 .letter-rain {
   position: fixed;
   inset: 0;
