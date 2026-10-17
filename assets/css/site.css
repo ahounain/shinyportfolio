@@ -1227,13 +1227,12 @@ a:focus-visible {
   font-size: 10px;
 }
 .rotation-current {
-  background: #20251f;
-  color: var(--paper);
-  padding: 28px 30px 30px;
+  color: var(--ink);
+  padding: 8px 0 32px;
   margin-bottom: 35px;
 }
 .rotation-current .timeline-node {
-  top: 30px;
+  top: 10px;
   background: #c93625;
   color: var(--paper);
 }
@@ -1262,13 +1261,26 @@ a:focus-visible {
   color: #63685c;
 }
 .rotation-current .rotation-org {
-  color: #bfc5b5;
+  color: #63685c;
 }
 .rotation-current .role-status {
   margin: 0;
-  color: #ff987b;
-  border-color: #dc694f;
-  font-size: 8px;
+  padding: 0;
+  border: 0;
+  color: #a32b1c;
+  font-size: 9px;
+}
+.rotation-dates {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+.rotation-current .rotation-heading h4 {
+  font-size: clamp(25px, 3vw, 46px);
+}
+.rotation-current .rotation-content {
+  margin-top: 24px;
 }
 .career-metrics {
   display: grid;
@@ -1316,10 +1328,10 @@ a:focus-visible {
   margin: 22px 0 0;
 }
 .rotation-current .rotation-content > p {
-  color: #e3e6d9;
+  color: var(--ink);
 }
 .rotation-current .rotation-content li {
-  color: #ccd2c2;
+  color: #484a41;
 }
 .rotation-summary {
   font-size: 14px;
@@ -1406,7 +1418,7 @@ a:focus-visible {
     padding-left: 20px;
   }
   .rotation-current {
-    padding: 22px 18px;
+    padding: 8px 0 32px;
   }
   .timeline-node {
     left: -34px;
@@ -1428,6 +1440,12 @@ a:focus-visible {
     display: block;
     font-size: 9px;
     margin-top: 16px;
+  }
+  .rotation-dates {
+    align-items: flex-start;
+  }
+  .rotation-current .rotation-heading h4 {
+    font-size: 29px;
   }
   .rotation-org {
     font-size: 7px;
