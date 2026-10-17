@@ -2025,6 +2025,7 @@ footer a {
   position: relative;
   isolation: isolate;
   overflow: clip;
+  background: var(--vermilion);
 }
 .portfolio-main > section,
 .portfolio-main > footer {
@@ -2034,26 +2035,28 @@ footer a {
 .architecture-backdrop {
   position: fixed;
   z-index: 0;
-  top: -18vh;
-  left: -10vw;
-  width: 120vw;
+  top: 0;
+  left: 0;
+  width: 100vw;
   max-width: none;
-  height: 118vh;
+  height: 100vh;
   object-fit: cover;
-  object-position: center bottom;
-  opacity: 0.28;
+  object-position: center;
+  opacity: 0.38;
+  filter: grayscale(1) contrast(1.25) brightness(1.15);
+  mix-blend-mode: multiply;
   pointer-events: none;
   user-select: none;
   mask-image: linear-gradient(to bottom, #000 0%, #000 85%, transparent 100%);
 }
 @media (max-width: 700px) {
   .architecture-backdrop {
-    top: -10svh;
-    left: -30vw;
-    width: 160vw;
-    height: 110svh;
-    object-position: 60% bottom;
-    opacity: 0.24;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100svh;
+    object-position: 78% center;
+    opacity: 0.3;
   }
 }
 .content-page {
