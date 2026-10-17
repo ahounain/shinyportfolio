@@ -14,12 +14,38 @@
   let previousFocus;
   let replayCount = 0;
   let raining = false;
-  const dismiss = () => {
+  const dismiss = async (immediate = false) => {
     generation += 1;
+    const current = generation;
     const focusedInside = overlay.contains(document.activeElement);
+    const markStyle = getComputedStyle(mark);
+    const frozenTransform = markStyle.transform;
+    const frozenOpacity = markStyle.opacity;
+    const overlayOpacity = getComputedStyle(overlay).opacity;
     animations.forEach((animation) => animation.cancel());
     animations = [];
+    if (!immediate && !reduced.matches && !overlay.hidden) {
+      mark.style.transform = frozenTransform;
+      mark.style.opacity = frozenOpacity;
+      root.classList.remove('intro-running', 'intro-docking');
+      const fade = overlay.animate([{ opacity: overlayOpacity }, { opacity: 0 }], {
+        duration: 320,
+        easing: 'ease-out',
+        fill: 'forwards',
+      });
+      animations.push(fade);
+      try {
+        await fade.finished;
+      } catch {
+        return;
+      }
+      if (generation !== current) return;
+    }
     overlay.hidden = true;
+    mark.style.removeProperty('transform');
+    mark.style.removeProperty('opacity');
+    animations.forEach((animation) => animation.cancel());
+    animations = [];
     overlay.classList.remove('is-docking');
     root.classList.remove('intro-running', 'intro-docking');
     if (focusedInside && previousFocus) previousFocus.focus();
@@ -48,26 +74,26 @@
     return animation.finished;
   };
   const play = async () => {
-    dismiss();
+    await dismiss();
     if (reduced.matches) return;
     const current = generation;
     previousFocus = document.activeElement;
-    window.scrollTo({ top: 0, behavior: 'instant' });
-    root.classList.add('intro-running');
     overlay.hidden = false;
     try {
+      const entrance = overlay.animate([{ opacity: 0 }, { opacity: 1 }], {
+        duration: 420,
+        easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)',
+      });
+      animations.push(entrance);
+      await entrance.finished;
+      if (generation !== current) return;
+      // Reposition only after the screen is covered, avoiding a visible scroll jump.
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      root.classList.add('intro-running');
       await Promise.race([
         document.fonts.load('100px VelvetOmen'),
         new Promise((resolve) => setTimeout(resolve, 1200)),
       ]);
-      if (generation !== current) return;
-      await animate(
-        [
-          { opacity: 0, transform: 'translateY(24px) scale(0.96)' },
-          { opacity: 1, transform: 'none' },
-        ],
-        { duration: 550, easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)' },
-      );
       if (generation !== current) return;
       await animate([{ opacity: 1 }, { opacity: 1 }], { duration: 450 });
       if (generation !== current) return;
@@ -82,14 +108,14 @@
             transform: `translate(${to.left - from.left}px, ${to.top - from.top}px) scale(${to.width / from.width}, ${to.height / from.height})`,
           },
         ],
-        { duration: 1050, easing: 'cubic-bezier(0.65, 0, 0.2, 1)', fill: 'forwards' },
+        { duration: 1250, easing: 'cubic-bezier(0.65, 0, 0.2, 1)', fill: 'forwards' },
       );
-      if (generation === current) dismiss();
+      if (generation === current) dismiss(true);
     } catch {
       if (generation === current) dismiss();
     }
   };
-  overlay.querySelector('button').addEventListener('click', dismiss);
+  overlay.querySelector('button').addEventListener('click', () => dismiss());
   const startRain = () => {
     if (raining) return;
     raining = true;
@@ -124,7 +150,40 @@
     if (!overlay.hidden) dismiss();
   });
   reduced.addEventListener('change', () => {
-    if (reduced.matches) dismiss();
+    if (reduced.matches) dismiss(true);
+  });
+  document.querySelectorAll('.career-details').forEach((details) => {
+    const summary = details.querySelector('summary');
+    const content = details.querySelector('.rotation-content');
+    let expanded = details.open;
+    let animation;
+    summary.addEventListener('click', (event) => {
+      event.preventDefault();
+      const from = details.getBoundingClientRect().height;
+      animation?.cancel();
+      expanded = !expanded;
+      details.classList.toggle('is-expanded', expanded);
+      content.inert = !expanded;
+      details.open = true;
+      const to = expanded
+        ? details.getBoundingClientRect().height
+        : summary.getBoundingClientRect().height + 2;
+      if (reduced.matches) {
+        details.open = expanded;
+        return;
+      }
+      const next = details.animate([{ height: `${from}px` }, { height: `${to}px` }], {
+        duration: 440,
+        easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+      });
+      animation = next;
+      next.finished.then(() => {
+        if (animation === next) {
+          details.open = expanded;
+          animation = undefined;
+        }
+      }).catch(() => {});
+    });
   });
   try {
     if (!sessionStorage.getItem('hounain-opening-seen') && !location.hash) {

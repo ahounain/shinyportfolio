@@ -1365,6 +1365,7 @@ a:focus-visible {
 }
 .career-details {
   border-block: 1px solid #acafa2;
+  overflow: clip;
 }
 .career-details summary {
   display: flex;
@@ -1381,8 +1382,9 @@ a:focus-visible {
 }
 .career-details summary span {
   font-size: 20px;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.career-details[open] summary span {
+.career-details.is-expanded summary span {
   transform: rotate(45deg);
 }
 .career-details[open] .rotation-content {
@@ -1947,6 +1949,30 @@ body {
   }
 }
 
+nav a,
+.text-link,
+.replay-intro,
+.opening-skip,
+.career-details summary,
+.experience-resume,
+footer a {
+  transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+}
+#name {
+  transition: opacity 0.6s ease;
+}
+.opening::after,
+.opening-caption,
+.opening-skip {
+  transition: opacity 0.5s ease;
+}
+.letter-rain {
+  animation: rain-arrive 1.2s ease both;
+}
+@keyframes rain-arrive {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 .employer-identity {
   display: flex;
   align-items: center;
